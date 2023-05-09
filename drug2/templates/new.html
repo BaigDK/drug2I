@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drug-Drug Interaction Checker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        margin-top: 50px;
+      }
+      .form-group label {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .form-control {
+        font-size: 18px;
+      }
+      .btn-primary {
+        font-size: 18px;
+      }
+      .alert {
+        margin-top: 20px;
+      }
+      .info-box {
+        background-color: #ffdede;
+        padding: 20px;
+        border-radius: 50px;
+        margin-top: 20px;
+      }
+      .info-box h3 {
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .info-box p {
+        font-size: 20px;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>DDI!</strong> You should check Drugs interactions below.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1>Drug Interaction Checker</h1>
+          <br>
+          <form id="ddi-form" action="{{ url_for('main') }}" method="POST">
+            <div class="form-group">
+              <label for="drug1-input">Drug 1:</label>
+              <input type="text" class="form-control" id="drug1-input" name="drug1" placeholder="Enter drug name...">
+            </div>
+            <div class="form-group">
+              <label for="drug2-input">Drug 2:</label>
+              <input type="text" class="form-control" id="drug2-input" name="drug2" placeholder="Enter drug name...">
+            </div>
+            <center>
+            <button type="submit" class="btn btn-primary">Check Interaction</button>
+          </center>
+          <div class="result" >
+            <br><br>
+            {% if result %}
+              {% for variable, value in original_input.items() %}
+                <b>{{ variable }}</b> : {{ value }}
+              {% endfor %}
+            <br>
+              <br> Predicted Drug iteraction side effects :
+                  
+               <p style="font-size:30px" <i><b>Severity : </b></i>{{ result }}</p>
+               <p style="font-size:30px" <i><b>Description : </b></i>{{ des }}</p>
+
+        
+          {% endif %}
+                </div>
+        
+          </form>
+          
+          <div id="ddi-result" class="mt-3">
+          </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+          <div class="info-box">
+            <h3>About DDI System</h3>
+            <p>Drug-Drug Interaction (DDI) refers to the pharmacological or clinical impact of one drug on the effectiveness or toxicity of another drug when both drugs are administered together.</p>
+        <p>DDIs are an important consideration in medication management, as they can significantly affect patient outcomes. As such, healthcare providers need to be aware of potential DDIs when prescribing medications and should carefully consider the risks and benefits of each medication.</p>
+          </div>
+        </div>
+     

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Drug Interaction Checker</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      
+      h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 30px;
+      }
+      
+      form {
+        margin: 0 auto;
+        max-width: 500px;
+        background-color: #fff;
+        border: 2px solid #eee;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #ddd;
+        margin-bottom: 30px;
+      }
+      
+      label {
+        display: block;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+      
+      input[type=text] {
+        font-size: 18px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+      }
+      
+      button {
+        font-size: 24px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.2s;
+      }
+      
+      button:hover {
+        background-color: #3e8e41;
+      }
+      
+      #result {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .interaction {
+        border: 2px solid #ddd;
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #ddd;
+        width: 100%;
+        max-width: 800px;
+        box-sizing: border-box;
+      }
+      
+      .interaction h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      
+      .interaction p {
+        font-size: 20px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+      }
+      
+      .severity-high {
+        color: red;
+        font-weight: bold;
+      }
+      
+      .severity-medium {
+        color: orange;
+        font-weight: bold;
+      }
+      
+      .severity-low {
+        color: yellow;
+        font-weight: bold;
+      }
+      
+      .message {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 30px;
+      }
+      
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Drug Interaction Checker</h1>
+    <form action="{{ url_for('main') }}" method="POST">
+        <label for="drug1">Drug 1:</label>
+        <input type="text" id="drug1" name="drug1" placeholder="Enter drug name"><br>
+        <label for="drug2">Drug 2:</label>
+        <input type="text" id="drug2" name="drug2" placeholder="Enter drug name"><br>
+        <button type="submit" id="check-interaction">Check Interaction</button>
+      </form>
+      <div id="result"></div>
+      <center>
+        <div class="result" >
+            <br><br>
+            {% if result %}
+                {% for variable, value in original_input.items() %}
+                    <b>{{ variable }}</b> : {{ value }}
+                {% endfor %}
+                <br>
+                <br> Predicted Drug iteraction side effects :
+                    
+                   <p style="font-size:20px" <i><b>Severity : </b></i>{{ result}}</p>
+                   <p style="font-size:20px" <i><b>Description : </b></i>{{ des }}</p>
+            {% endif %}
+        
+        </div>
+        
+</center>
+    </body>
+  </html>
